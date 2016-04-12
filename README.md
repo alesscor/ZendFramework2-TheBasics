@@ -1,6 +1,6 @@
 # Zend Framework 2: The Basics with Matthew Setter
 
-** Course Application Overview **
+**Course Application Overview**
 * Module Manager
   * Based on Zend squeleton
   * Provides MVC
@@ -10,7 +10,7 @@
 * Forms
   * Input filtering and validation
 
-** The Module Manager **  
+**The Module Manager**  
   * A module: a "namespaced" directory with a single `Module` class on it
   * Core concepts:
     * Autoloader: locates and loads every `Module` class
@@ -23,13 +23,13 @@
     * in a namespace directory must exist a class called `module.php`
     * there is a `module.config.php` to set up routing, ServiceManager configuration, transalations, controller installation, view manager configuration, etc.
 
-** The Service Manager **
+**The Service Manager**
 * Highly critical, must be understood to easy the rest of the framework: provides services to your application
 * It helps the way you initialise and retrieve services within your application
 * For example to register services such as table objects, database connection adapters, log objects, email services, access location services, etc.; everything must be referred to throughout your application
 * It facilitates calling instances of factories and abstract factories, invokables, lazy-loaded objects, aliases
 
-** The Basic Project **
+**The Basic Project**
 * Download `composer.phar`
 
   ```bash
@@ -53,4 +53,4 @@
 
 
 
-** Understanding Zend Framework **
+**Understanding Zend Framework**
