@@ -232,7 +232,7 @@ Zend Framework 2: The Basics with Matthew Setter
   Writing lock file
   Generating autoload files  
   ```
-  That makes change the `composer.json` to:
+  That makes the `composer.json` change to:
   ```json
   {
       "name": "zendframework/skeleton-application",
