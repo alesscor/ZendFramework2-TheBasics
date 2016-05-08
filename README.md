@@ -210,7 +210,7 @@ Zend Framework 2: The Basics with Matthew Setter
   * Create modules
   * Create controllers and actions for the modules (and automatically creates the view template files)
   * Create an Autoload Classmap
-  * Review possible issues using Diagnostics Classes
+  * Review possible issues using Diagnostics classes
 
 * To start using it you have to add it in the `composer.json` file as a development dependency in this way: `php composer.phar require --dev zendframework/zftool:dev-master`.
   ```bash
