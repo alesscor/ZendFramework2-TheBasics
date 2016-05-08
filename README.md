@@ -201,6 +201,57 @@ Zend Framework 2: The Basics with Matthew Setter
 
   4 directories, 19 files
   ```
-* At directory `public` are located static files like .css, .js images and fonts, as well as the bootstrap file `index.php`, and basic web server configuration files like `.htaccess` and `web.confg`. Contains the "mod rewrite" configuration in order that all requests that are for non static resources are processed by that file.
+* At directory `public` are located static files like .css, .js images and fonts, as well as the bootstrap file `index.php`, and basic web server configuration files like `.htaccess` and `web.confg`. Contains the "mod rewrite" configuration in order that all requests that are for non static resources are processed by that PHP file.
+
+**ZF2 Tool Overview**
+
+* The ZFTool helps maintaining the modules of a PHP Zend Framework application. It's not so advance as others like Symfony or Yii which automatically provides information from databases' structure. You are able to:
+  * Create ZF2 Projects
+  * Create modules
+  * Create controllers and actions for the modules (and automatically creates the view template files)
+  * Create an Autoload Classmap
+  * Review possible issues using Diagnostics Classes
+
+* To start using it you have to add it in the `composer.json` file as a development dependency in this way: `php composer.phar require --dev zendframework/zftool:dev-master`.
+  ```bash
+  ...\zf2basics>php ..\composer.phar require --dev zendfr amework/zftool:dev-master
+  ./composer.json has been updated
+  Loading composer repositories with package information
+  Updating dependencies (including require-dev)
+    - Installing zendframework/zenddiagnostics (v1.0.9)
+      Loading from cache
+
+    - Installing zendframework/zftool (dev-master 840c3ee)
+      Cloning 840c3eecd58454396983d84d1da293813af484af
+
+  zendframework/zenddiagnostics suggests installing sensiolabs/security-checker (Required by Check\SecurityAdvisory)
+  zendframework/zenddiagnostics suggests installing guzzle/http (Required by Check\GuzzleHttpService)
+  zendframework/zenddiagnostics suggests installing predis/predis (Required by Check\Redis)
+  zendframework/zenddiagnostics suggests installing videlalvaro/php-amqplib (Required by Check\RabbitMQ)
+  zendframework/zenddiagnostics suggests installing doctrine/migrations (Required by Check\DoctrineMigration)
+  Writing lock file
+  Generating autoload files  
+  ```
+  That makes change the `composer.json` to:
+  ```json
+  {
+      "name": "zendframework/skeleton-application",
+      "description": "Skeleton Application for ZF2",
+      "license": "BSD-3-Clause",
+      "keywords": [
+          "framework",
+          "zf2"
+      ],
+      "homepage": "http://framework.zend.com/",
+      "require": {
+          "php": ">=5.5",
+          "zendframework/zendframework": "~2.5"
+      },
+      "require-dev": {
+          "zendframework/zftool": "dev-master"
+      }
+  }
+
+  ```
 
 **Understanding Zend Framework**
