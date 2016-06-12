@@ -365,8 +365,8 @@ Zend Framework 2: The Basics with Matthew Setter
 
   <...>\zf2basics>   
   ```
-**Exploring the Application module that comes in the skeleton**
-- Looking at the module's `src` we can find:
+**Exploring a module and its composition**
+- The module to explore, without loss of generality, is the `Application` module which comes in the skeleton. Looking at the module's `src` we can find:
   ```bash
   $ tree src
   src
@@ -399,5 +399,7 @@ Zend Framework 2: The Basics with Matthew Setter
 
   0 directories, 1 file
   ```
-- Comparing the Application and the VideoManager modules' `module.config.php` file, the second comes empty while the other contents configuration of routes, controllers, views, services and actions.
+- Comparing the `module.config.php` file in `Application` and `VideoManager` modules', the second comes empty while the other contents configuration of routes, controllers, views, services and actions.
+- There it comes how `Module.php` file calls methods based on the previous configuration. In here it's possible to inject dependency in case of need. There is a reference to "PSR-0", PHP autoloading standard (http://www.php-fig.org/psr/psr-0/), wich is replaced by the "PSR-4" (http://www.php-fig.org/psr/psr-4/)
+
 **Understanding Zend Framework**
