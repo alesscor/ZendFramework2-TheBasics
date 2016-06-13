@@ -16,7 +16,7 @@ return array(
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
             'video' => array( // @diffs: video key instead of application key
-                'type'    => 'Zend\Mvc\Router\Http\Literal', // @diff: instead of Literal
+                'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/videos',
                     'defaults' => array(

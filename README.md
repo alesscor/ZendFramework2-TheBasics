@@ -399,7 +399,82 @@ Zend Framework 2: The Basics with Matthew Setter
 
   0 directories, 1 file
   ```
-- Comparing the `module.config.php` file in `Application` and `VideoManager` modules', the second comes empty while the other contents configuration of routes, controllers, views, services and actions.
+- Comparing the `module.config.php` file in `Application` and `VideoManager` modules', the second comes empty while the other contents basic configuration of routes, controllers, views, services and actions. It was done a copy paste from the first to the second, cleaning first's specific configuration and make the file specific to `VideoManager` changing the namespace to the corresponding one and the main route configuration to:
+
+  ```php
+  <?php
+  // ...
+  namespace VideoManager; // @diffs: instead of namespace Application
+
+  return array(
+      'router' => array(
+          'routes' => array(
+              'video' => array( // @diffs: video key instead of application key
+                  'type'    => 'Literal',
+                  'options' => array(
+                      'route'    => '/videos',
+                      'defaults' => array(
+                          '__NAMESPACE__' => 'VideoManager\Controller',
+                          'controller'    => 'Index',
+                          'action'        => 'index',
+                      ),
+                  ),
+                  'may_terminate' => true,
+                  'child_routes' => array(
+                      'default' => array(
+                          'type'    => 'Segment',
+                          'options' => array(
+                              'route'    => '/[:controller[/:action]]',
+                              'constraints' => array(
+                                  'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                  'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                              ),
+                              'defaults' => array(
+                              ),
+                          ),
+                      ),
+                  ),
+              ),
+          ),
+      ),
+      'service_manager' => array(
+      ),  
+      'controllers' => array(
+          'invokables' => array(
+              'VideoManager\Controller\Index' => Controller\IndexController::class
+          ),
+      ),
+      'view_manager' => array(
+          'template_map' => array(
+          ),
+          'template_path_stack' => array(
+              __DIR__ . '/../view',
+          ),
+      )
+  );
+  ```
+
+- Since I'm using IIS, I had to configure a Re-Write URL rule as follows in `web.config` file at public folder (the site's root directory):
+
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <configuration>
+      <system.webServer>
+          <rewrite>
+              <rules>
+                  <rule name="Removal of index.php">
+                      <match url=".*" />
+                      <action type="Rewrite" url="/index.php/{R:0}" />
+                      <conditions>
+                          <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                          <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+                      </conditions>
+                  </rule>
+              </rules>
+          </rewrite>
+      </system.webServer>
+  </configuration>
+  ```
 - There it comes how `Module.php` file calls methods based on the previous configuration. In here it's possible to inject dependency in case of need. There is a reference to "PSR-0", PHP autoloading standard (http://www.php-fig.org/psr/psr-0/), wich is replaced by the "PSR-4" (http://www.php-fig.org/psr/psr-4/)
 
 **Understanding Zend Framework**
