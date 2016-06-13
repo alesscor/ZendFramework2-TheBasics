@@ -399,7 +399,7 @@ Zend Framework 2: The Basics with Matthew Setter
 
   0 directories, 1 file
   ```
-- Comparing the `module.config.php` file in `Application` and `VideoManager` modules', the second comes empty while the other contents basic configuration of routes, controllers, views, services and actions. It was done a copy paste from the first to the second, cleaning first's specific configuration and make the file specific to `VideoManager` changing the namespace to the corresponding one and the main route configuration to:
+- Comparing the `module.config.php` file in `Application` and `VideoManager` modules', the second comes empty while the other contents basic configuration of routes, controllers, views, services and actions. It was done a copy paste from the first to the second, cleaning first's specific configuration and making the file specific to `VideoManager` changing the namespace to the corresponding one and the main route configuration, concretely:
 
   ```php
   <?php
