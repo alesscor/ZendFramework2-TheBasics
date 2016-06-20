@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-namespace VideoManager; // @diffs: instead of namespace Application
+namespace SecondModule;
 
 return array(
     'router' => array(
@@ -15,12 +15,12 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'video' => array( // @diffs: video key instead of application key
+            'secondmodule' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/videos',
+                    'route'    => '/second',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'VideoManager\Controller',
+                        '__NAMESPACE__' => 'SecondModule\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
@@ -47,13 +47,11 @@ return array(
     ),  
     'controllers' => array(
         'invokables' => array(
-            'VideoManager\Controller\Index' => Controller\IndexController::class 
+            'SecondModule\Controller\Index' => Controller\IndexController::class 
         ),
     ),
     'view_manager' => array(
         'template_map' => array(
-        		"simple-output"=> __DIR__."/../view/video-manager/index/simple-output.phtml",
-        		"copyright"=> __DIR__."/../view/video-manager/index/copyright-notice.phtml"
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

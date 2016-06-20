@@ -1,6 +1,6 @@
 <?php
 
-namespace VideoManager\Controller;
+namespace SecondModule\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -10,18 +10,7 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        // return new ViewModel();
-        $view=new ViewModel(
-        		array("music"=>"rock",
-        				"artist"=>"pearl jam"
-        		));
-        $view->setVariable("socialMedia", "Google+");
-        $view->setVariables(
-        		array("networks"=>array("Twitter","Google+","LinkedIn","Facebook"),
-        				"car"=>"Porsche 911"
-        		));
-        // $view->setTemplate("simple-output");
-        return $view;
+        return new ViewModel();
     }
 
     public function deleteAction()

@@ -475,6 +475,69 @@ Zend Framework 2: The Basics with Matthew Setter
       </system.webServer>
   </configuration>
   ```
+- Adding a second module:  
+  ```
+  vendor\bin\zf.php.bat create module SecondModule
+  vendor\bin\zf.php.bat create controller Index SecondModule
+  vendor\bin\zf.php.bat create action delete Index SecondModule
+  vendor\bin\zf.php.bat create action view Index SecondModule
+  vendor\bin\zf.php.bat create action search Index SecondModule
+  vendor\bin\zf.php.bat create action manage Index SecondModule
+  ```
+
 - There it comes how `Module.php` file calls methods based on the previous configuration. In here it's possible to inject dependency in case of need. There is a reference to "PSR-0", PHP autoloading standard (http://www.php-fig.org/psr/psr-0/), wich is replaced by the "PSR-4" (http://www.php-fig.org/psr/psr-4/)
+
+**Set template variables**
+
+- Making changes to `<...>\zf2basics\module\VideoManager\src\VideoManager\Controller\IndexController.php` and usage of `ViewModel` to set variablesand values to be used in the template view `<...>\zf2basics\module\VideoManager\view\video-manager\index\index.phtml`. Using that class' constructor and methods `setVariable(s)`.
+  ```php
+    <?php
+    // ...
+    public function indexAction()
+    {
+        // return new ViewModel();
+        $view=new ViewModel(
+            array("music"=>"rock",
+                "artist"=>"pearl jam"
+            ));
+        $view->setVariable("socialMedia", "Google+");
+        $view->setVariables(
+            array("networks"=>array("Twitter","Google+","LinkedIn","Facebook"),
+                "car"=>"Porsche 911"
+            ));
+        return $view;
+    }
+  ```
+
+- What if we want to refer to a non-automatic-template file? You are able to go to the modules `view_manager` configuration and reference the file to be used into the `template_map`. An example is with `simple-output` file:
+
+  ```php
+    <?php
+    // ...
+  'view_manager' => array(
+      'template_map' => array(
+          "simple-output"=> __DIR__."/../view/video-manager/index/simple-output.phtml"
+      ),
+      'template_path_stack' => array(
+          __DIR__ . '/../view',
+      ),
+  )
+  ```
+
+  After that simply use the `setTemplate` (to replace a template) or `render` (to include a template) `ViewModel`'s functions. Example:
+
+  ```php
+  Action "index", controller "Index", module "VideoManager".
+
+  <ul>
+  <li><?php print $this->music; ?></li>
+  <li><?php print $this->artist; ?></li>
+  <li><?php print $this->socialMedia; ?></li>
+  <li><?php print_r($this->networks); ?></li>
+  <li><?php print $this->car; ?></li>
+  </ul>
+
+  <?php print $this->render("copyright"); ?>
+  ```  
 
 **Understanding Zend Framework**
