@@ -539,5 +539,48 @@ Zend Framework 2: The Basics with Matthew Setter
 
   <?php print $this->render("copyright"); ?>
   ```  
+**Modifying layouts**
+
+* You are able to use a "two step view": have templates with global and action view levels. The former for general output like header, and footer, the second for specific action's output. In ZendFramework 2 they are set by the application's module, i.e. `\module\Application\config\module.config.php` in the setting of `template_map[layout/layout]` which is the default template file. You can add a module's `layout/layout` setting it on its corresponding template map.
+
+* You can set a custom layout to a controller's action at managing events like routing, errors, dispatching, bootstraping, rendering and responding. For example in the dispatch event you are able to inject a custom layout:
+
+  Modifying the module:
+  ```php
+  public function int(ModuleManager $manager){
+    $events=$manager->getEventManager();
+    $sharedEvents=$events->getSharedManager();
+    // here you listen for your event and injects the layout "video-layout" in the callback
+    $sharedEvents->attach(__NAMESPACE__,"dispatch", function($e){
+      $controller=$e->getTarget();
+      if(get_class($controller)=="VideoManager\Controller\IndexController"){
+        $controller->layout("video-layout");
+      }
+    },100);
+  }
+  ```
+  Adding the layout file `module\VideoManager\view\layout\video-layout.phtml` and its contents.
+
+  Referencing the alias to that file in the modules configuration template's map:
+
+  ```php
+  //...
+  'view_manager' => array(
+      'template_map' => array(
+          "video-layout"=> __DIR__."/../view/layout/video-layout.phtml",
+
+  //...
+  ```
+* In case you want to set the layout to one specific controller's action, go to the action and set the layout. E.g. in `module\VideoManager\src\VideoManager\Controller\IndexController.php`:
+
+  ```php
+  //...
+  public function deleteAction()
+  {
+    $this->layout("video-layout");
+      return new ViewModel();
+  }
+  //...
+  ```
 
 **Understanding Zend Framework**
